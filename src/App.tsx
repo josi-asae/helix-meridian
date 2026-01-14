@@ -34,10 +34,13 @@ function Navigation() {
           ))}
         </div>
         <a
-          href="#contact"
-          className="hidden md:inline-flex px-5 py-2 bg-teal text-cream rounded-full font-medium hover:bg-teal-light transition-colors"
+          href="https://github.com/josi-asae/helix-meridian"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:inline-flex items-center gap-2 px-5 py-2 bg-charcoal text-cream rounded-full font-medium hover:bg-charcoal-light transition-colors"
         >
-          Get in Touch
+          <GitHubIcon />
+          GitHub
         </a>
       </div>
     </nav>
@@ -285,25 +288,25 @@ function Team() {
       name: "Dr. Sarah Chen",
       role: "CEO & Co-Founder",
       bio: "Former CSO at Genetix Therapeutics. PhD in Molecular Biology from MIT.",
-      initials: "SC"
+      image: "/team/sarah-chen.jpg"
     },
     {
       name: "Dr. Marcus Webb",
       role: "Chief Scientific Officer",
       bio: "Pioneer in AAV vector engineering with 50+ publications in gene therapy.",
-      initials: "MW"
+      image: "/team/marcus-webb.jpg"
     },
     {
       name: "Dr. Elena Rodriguez",
       role: "VP of Clinical Development",
       bio: "15 years experience leading gene therapy clinical trials across phases.",
-      initials: "ER"
+      image: "/team/elena-rodriguez.jpg"
     },
     {
       name: "James Park",
       role: "Chief Business Officer",
       bio: "Previously led BD at major biotech. MBA from Wharton.",
-      initials: "JP"
+      image: "/team/james-park.jpg"
     }
   ];
 
@@ -330,10 +333,12 @@ function Team() {
               className="bg-teal-light/30 backdrop-blur-sm rounded-2xl p-6 border border-sage/20 hover:border-honey/50 transition-all hover:-translate-y-1"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-honey to-honey-light flex items-center justify-center mb-4 mx-auto">
-                <span className="font-serif text-2xl font-bold text-teal-dark">
-                  {member.initials}
-                </span>
+              <div className="w-24 h-24 rounded-full overflow-hidden mb-4 mx-auto ring-3 ring-honey/50">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h3 className="font-serif text-xl font-semibold text-cream text-center mb-1">
                 {member.name}
@@ -377,8 +382,9 @@ function Contact() {
                 <div>
                   <h4 className="font-semibold text-charcoal mb-1">Headquarters</h4>
                   <p className="text-charcoal-light">
-                    400 Innovation Drive, Suite 200<br />
-                    Cambridge, MA 02142
+                    85 Great Portland Street<br />
+                    First Floor<br />
+                    London, W1W 7LT
                   </p>
                 </div>
               </div>
@@ -390,8 +396,7 @@ function Contact() {
                 <div>
                   <h4 className="font-semibold text-charcoal mb-1">Email</h4>
                   <p className="text-charcoal-light">
-                    info@helixmeridian.bio<br />
-                    partnerships@helixmeridian.bio
+                    josi@asae.bio
                   </p>
                 </div>
               </div>
@@ -429,7 +434,7 @@ function Contact() {
                 <input
                   type="email"
                   className="w-full px-4 py-3 rounded-xl border border-sage/30 bg-cream focus:border-teal focus:ring-2 focus:ring-teal/20 outline-none transition-all"
-                  placeholder="jane@example.com"
+                  placeholder="you@company.com"
                 />
               </div>
               <div>
@@ -688,6 +693,14 @@ function EmailIcon() {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6 text-teal">
       <rect x="2" y="4" width="20" height="16" rx="2"/>
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+    </svg>
+  );
+}
+
+function GitHubIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
     </svg>
   );
 }
