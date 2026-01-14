@@ -108,7 +108,7 @@ function About() {
   const values = [
     {
       icon: <MoleculeIcon />,
-      title: "Scientific Rigor",
+      title: "Scientific Rigour",
       description: "Every decision is grounded in peer-reviewed science and validated through rigorous experimentation."
     },
     {
@@ -142,8 +142,8 @@ function About() {
             </p>
             <p className="text-charcoal-light text-lg leading-relaxed">
               Our proprietary <span className="text-teal font-semibold">MeridianVector™</span> platform
-              enables targeted gene delivery with unprecedented precision, minimizing
-              off-target effects while maximizing therapeutic efficacy.
+              enables targeted gene delivery with unprecedented precision, minimising
+              off-target effects while maximising therapeutic efficacy.
             </p>
           </div>
           <div className="relative">
@@ -203,7 +203,7 @@ function Pipeline() {
     },
     {
       id: "HM-303",
-      name: "Hemophilia B",
+      name: "Haemophilia B",
       phase: "Preclinical",
       progress: 20,
       description: "Novel Factor IX gene therapy with sustained expression profile."
@@ -322,7 +322,7 @@ function Team() {
           </h2>
           <p className="text-sage-light text-lg max-w-2xl mx-auto">
             Our leadership team brings together decades of experience in gene therapy
-            research, clinical development, and biotechnology commercialization.
+            research, clinical development, and biotechnology commercialisation.
           </p>
         </div>
 
