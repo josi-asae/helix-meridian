@@ -1,6 +1,7 @@
 function App() {
   return (
     <div className="min-h-screen bg-cream">
+      <DemoBanner />
       <Navigation />
       <Hero />
       <About />
@@ -12,9 +13,17 @@ function App() {
   );
 }
 
+function DemoBanner() {
+  return (
+    <div className="fixed top-0 left-0 right-0 z-60 bg-honey text-charcoal text-center py-2 px-4 text-sm font-medium">
+      This website is for demonstration purposes only. Helix Meridian is a fictional company and does not represent a real organisation.
+    </div>
+  );
+}
+
 function Navigation() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-sage/20">
+    <nav className="fixed top-[36px] left-0 right-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-sage/20">
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 group">
           <HelixLogo className="w-10 h-10 transition-transform group-hover:rotate-12" />
@@ -49,7 +58,7 @@ function Navigation() {
 
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-32">
       {/* Organic background pattern */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-0 w-[600px] h-[600px] opacity-30">
