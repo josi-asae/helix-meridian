@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const BOOKING_URL = 'https://calendar.app.google/gCYMwNQZrKvWLWhz7'
 
