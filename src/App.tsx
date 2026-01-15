@@ -210,14 +210,16 @@ function About() {
             </p>
           </div>
           <div className="relative">
-            <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-teal/10 to-sage/20 overflow-hidden border border-sage/30">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <CellularPattern />
+            <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-teal to-teal-light overflow-hidden border border-teal/30 shadow-xl">
+              {/* Animated background pattern */}
+              <div className="absolute inset-0">
+                <PatentVisual />
               </div>
-              <div className="absolute inset-0 flex items-center justify-center">
+              {/* Content overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-teal/80 via-transparent to-transparent">
                 <div className="text-center p-8">
-                  <div className="font-serif text-6xl font-bold text-teal mb-2">15+</div>
-                  <div className="text-charcoal-light font-medium">Patent Applications</div>
+                  <div className="font-serif text-7xl font-bold text-cream mb-2 drop-shadow-lg">15+</div>
+                  <div className="text-sage-light font-semibold tracking-wide uppercase text-sm">Patent Applications</div>
                 </div>
               </div>
             </div>
@@ -690,19 +692,89 @@ function DNAHelix() {
   );
 }
 
-function CellularPattern() {
+function PatentVisual() {
+  const patents = [
+    { x: 15, y: 20, delay: 0, scale: 1 },
+    { x: 45, y: 10, delay: 0.5, scale: 0.8 },
+    { x: 75, y: 25, delay: 1, scale: 0.9 },
+    { x: 25, y: 55, delay: 1.5, scale: 0.85 },
+    { x: 55, y: 45, delay: 0.3, scale: 1.1 },
+    { x: 80, y: 60, delay: 0.8, scale: 0.75 },
+    { x: 10, y: 80, delay: 1.2, scale: 0.9 },
+    { x: 40, y: 75, delay: 0.2, scale: 0.8 },
+    { x: 70, y: 85, delay: 0.7, scale: 0.95 },
+  ];
+
   return (
-    <svg viewBox="0 0 200 150" fill="none" className="w-full h-full opacity-30">
-      {[...Array(12)].map((_, i) => (
-        <circle
+    <svg viewBox="0 0 100 100" fill="none" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="patentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#faf6f0" stopOpacity="0.3"/>
+          <stop offset="100%" stopColor="#c9a227" stopOpacity="0.2"/>
+        </linearGradient>
+        <filter id="patentGlow">
+          <feGaussianBlur stdDeviation="1" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      {/* Connection lines */}
+      <g stroke="#faf6f0" strokeOpacity="0.15" strokeWidth="0.5">
+        <line x1="20" y1="25" x2="50" y2="15"/>
+        <line x1="50" y1="15" x2="80" y2="30"/>
+        <line x1="30" y1="60" x2="60" y2="50"/>
+        <line x1="60" y1="50" x2="85" y2="65"/>
+        <line x1="20" y1="25" x2="30" y2="60"/>
+        <line x1="50" y1="15" x2="60" y2="50"/>
+        <line x1="80" y1="30" x2="85" y2="65"/>
+      </g>
+
+      {/* Patent documents */}
+      {patents.map((patent, i) => (
+        <g
           key={i}
-          cx={30 + (i % 4) * 50}
-          cy={30 + Math.floor(i / 4) * 45}
-          r={15 + Math.random() * 10}
-          fill="none"
-          stroke="#1e4d4d"
-          strokeWidth="1"
-          strokeOpacity={0.3 + Math.random() * 0.3}
+          transform={`translate(${patent.x}, ${patent.y}) scale(${patent.scale})`}
+          className="animate-float"
+          style={{ animationDelay: `${patent.delay}s`, animationDuration: `${4 + patent.delay}s` }}
+          filter="url(#patentGlow)"
+        >
+          {/* Document shape */}
+          <rect
+            x="-5" y="-7"
+            width="10" height="14"
+            rx="1"
+            fill="url(#patentGrad)"
+            stroke="#faf6f0"
+            strokeWidth="0.5"
+            strokeOpacity="0.5"
+          />
+          {/* Folded corner */}
+          <path
+            d="M3 -7 L5 -7 L5 -5 L3 -5 Z"
+            fill="#c9a227"
+            fillOpacity="0.4"
+          />
+          {/* Text lines */}
+          <line x1="-3" y1="-3" x2="2" y2="-3" stroke="#faf6f0" strokeWidth="0.5" strokeOpacity="0.6"/>
+          <line x1="-3" y1="0" x2="3" y2="0" stroke="#faf6f0" strokeWidth="0.5" strokeOpacity="0.4"/>
+          <line x1="-3" y1="3" x2="1" y2="3" stroke="#faf6f0" strokeWidth="0.5" strokeOpacity="0.4"/>
+        </g>
+      ))}
+
+      {/* Floating molecules/particles */}
+      {[...Array(8)].map((_, i) => (
+        <circle
+          key={`particle-${i}`}
+          cx={10 + i * 12}
+          cy={20 + (i % 3) * 30}
+          r={1 + (i % 2)}
+          fill="#c9a227"
+          fillOpacity={0.3 + (i % 3) * 0.1}
+          className="animate-pulse-glow"
+          style={{ animationDelay: `${i * 0.3}s` }}
         />
       ))}
     </svg>
