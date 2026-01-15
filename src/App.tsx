@@ -1,8 +1,19 @@
+import { useState, useEffect } from 'react';
+
+const BOOKING_URL = 'https://calendar.app.google/gCYMwNQZrKvWLWhz7'
+
 function App() {
+  const [bannerDismissed, setBannerDismissed] = useState(() => {
+    return localStorage.getItem('demoBannerDismissed') === 'true';
+  });
+
   return (
     <div className="min-h-screen bg-cream">
-      <DemoBanner />
-      <Navigation />
+      <DemoBanner dismissed={bannerDismissed} onDismiss={() => {
+        setBannerDismissed(true);
+        localStorage.setItem('demoBannerDismissed', 'true');
+      }} />
+      <Navigation bannerVisible={!bannerDismissed} />
       <Hero />
       <About />
       <Pipeline />
@@ -13,18 +24,40 @@ function App() {
   );
 }
 
-function DemoBanner() {
+function DemoBanner({ dismissed, onDismiss }: { dismissed: boolean; onDismiss: () => void }) {
+  if (dismissed) return null;
+
   return (
-    <div className="fixed top-0 left-0 right-0 z-60 bg-honey text-charcoal text-center py-2 px-4 text-sm font-medium" id="demo-banner">
-      <span className="hidden sm:inline">This website is for demonstration purposes only. Helix Meridian is a fictional company and does not represent a real organisation.</span>
-      <span className="sm:hidden">Demo only. Helix Meridian is fictional.</span>
+    <div className="fixed top-0 left-0 right-0 z-60 bg-honey text-charcoal py-2 px-4 text-sm font-medium" id="demo-banner">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+        <span className="text-center">
+          <span className="hidden sm:inline">Demo site only.</span>
+          <span className="sm:hidden">Demo site.</span>
+          {' '}Need help building your biotech website?
+        </span>
+        <a
+          href={BOOKING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 px-3 py-1 bg-charcoal text-cream rounded-full text-xs font-semibold hover:bg-charcoal-light transition-colors whitespace-nowrap"
+        >
+          Book a free discovery call →
+        </a>
+        <button
+          onClick={onDismiss}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-charcoal/70 hover:text-charcoal text-xl leading-none p-1"
+          aria-label="Dismiss banner"
+        >
+          ×
+        </button>
+      </div>
     </div>
   );
 }
 
-function Navigation() {
+function Navigation({ bannerVisible }: { bannerVisible: boolean }) {
   return (
-    <nav className="fixed top-[32px] sm:top-[36px] left-0 right-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-sage/20">
+    <nav className={`fixed left-0 right-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-sage/20 transition-all duration-300 ${bannerVisible ? 'top-[52px] sm:top-[40px]' : 'top-0'}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 group">
           <HelixLogo className="w-10 h-10 transition-transform group-hover:rotate-12" />
@@ -54,7 +87,7 @@ function Navigation() {
             Tutorial
           </a>
           <a
-            href="#TBD_COMPANION_TUTORIAL_URL"
+            href="https://website-companion-tutorial-1.asae.bio/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2 bg-teal text-cream rounded-full font-medium hover:bg-teal-light transition-colors"
