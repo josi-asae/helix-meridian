@@ -672,18 +672,35 @@ function DNAHelix() {
       <g className="animate-float" filter="url(#glow)">
         {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => {
           const y = 30 + i * 26;
-          const offset = Math.sin(i * 0.7) * 50;
+          const phase = i * 0.7;
+          // Each strand traverses the full width (100 to 200), crossing at center
+          const tealX = 150 + Math.sin(phase) * 50;
+          const goldX = 150 - Math.sin(phase) * 50;
+          // Determine which strand is "in front" based on the derivative (direction of movement)
+          const tealInFront = Math.cos(phase) > 0;
+
+          const tealNode = (
+            <g key={`teal-${i}`}>
+              <circle cx={tealX} cy={y} r="10" fill="url(#helixGrad1)"/>
+              <circle cx={tealX} cy={y} r="4" fill="#faf6f0" fillOpacity="0.6"/>
+            </g>
+          );
+
+          const goldNode = (
+            <g key={`gold-${i}`}>
+              <circle cx={goldX} cy={y} r="10" fill="url(#helixGrad2)"/>
+              <circle cx={goldX} cy={y} r="4" fill="#faf6f0" fillOpacity="0.6"/>
+            </g>
+          );
+
           return (
             <g key={i}>
               <line
-                x1={100 + offset} y1={y}
-                x2={200 - offset} y2={y}
+                x1={tealX} y1={y}
+                x2={goldX} y2={y}
                 stroke="#7d9d7d" strokeWidth="2" strokeOpacity="0.5"
               />
-              <circle cx={100 + offset} cy={y} r="10" fill="url(#helixGrad1)"/>
-              <circle cx={200 - offset} cy={y} r="10" fill="url(#helixGrad2)"/>
-              <circle cx={100 + offset} cy={y} r="4" fill="#faf6f0" fillOpacity="0.6"/>
-              <circle cx={200 - offset} cy={y} r="4" fill="#faf6f0" fillOpacity="0.6"/>
+              {tealInFront ? <>{goldNode}{tealNode}</> : <>{tealNode}{goldNode}</>}
             </g>
           );
         })}
