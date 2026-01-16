@@ -212,11 +212,11 @@ function About() {
           <div className="relative">
             <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-teal to-teal-light overflow-hidden border border-teal/30 shadow-xl">
               {/* Animated background pattern */}
-              <div className="absolute inset-0">
+              <div className="absolute inset-0 rounded-2xl overflow-hidden">
                 <PatentVisual />
               </div>
               {/* Content overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-teal/80 via-transparent to-transparent">
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-teal/80 via-transparent to-transparent rounded-2xl">
                 <div className="text-center p-8">
                   <div className="font-serif text-7xl font-bold text-cream mb-2 drop-shadow-lg">15+</div>
                   <div className="text-sage-light font-semibold tracking-wide uppercase text-sm">Patent Applications</div>
